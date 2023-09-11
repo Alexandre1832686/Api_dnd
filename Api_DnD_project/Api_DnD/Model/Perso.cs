@@ -11,7 +11,7 @@ namespace Api_DnD.Model
         public Arme arme { get; set; }
         public Classes classes { get; set; }
         public Race race { get; set; }
-        public List<int> skills { get; set; }
+        public List<Skill> skills { get; set; }
         public string personalitetrait { get; set; }
         public string ideal { get; set; }
         public string bonds { get; set; }
