@@ -7,6 +7,10 @@ namespace Api_DnD.Model
         public string Nom { get; set; }
         public string Description { get; set; }
         public int inspiration { get; set; }
+
+        public int armureId { get; set; }
+        public int armeId { get; set; }
+
         public Armure armure { get; set; }
         public Arme arme { get; set; }
         public Classes classes { get; set; }
@@ -38,6 +42,27 @@ namespace Api_DnD.Model
         public int GetProficiencyBonus()
         {
             throw new NotImplementedException();
+        }
+
+        public static Perso PersoToPerso(Perso x)
+        {
+            return new Perso
+            {
+                Nom = x.Nom,
+                Description = x.Description,
+                inspiration = x.inspiration,
+                armure = x.armure,
+                arme = x.arme,
+                classes = x.classes,
+                race = x.race,
+                skills = x.skills,
+                personalitetrait = x.personalitetrait,
+                ideal = x.ideal,
+                bonds = x.bonds,
+                flaws = x.flaws, 
+                niv = x.niv,
+                id = x.id
+            };
         }
         
     }

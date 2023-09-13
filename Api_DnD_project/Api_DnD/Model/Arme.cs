@@ -12,6 +12,16 @@
 
         public int id { get; set; }
 
-       
+       public static Arme ArmeToArme(Arme a)
+       {
+            return new Arme
+            {
+                BonusJet = a.BonusJet,
+                BonusForce = a.BonusForce,
+                Nom = a.Nom,
+                Enchantement = a.Enchantement,
+                id = a.id
+            };
+       }
     }
 }
