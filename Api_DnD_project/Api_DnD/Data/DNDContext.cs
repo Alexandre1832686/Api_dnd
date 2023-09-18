@@ -17,6 +17,10 @@ namespace Api_DnD.Data
         public DbSet<Perso> Persos { get; set; }
         public DbSet<Race> Races { get; set; }
 
+        public DbSet<PNJ> PNJ { get; set; }
+
+        public DbSet<Key> Key {get;set;}
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Arme>().ToTable("Arme");
@@ -25,6 +29,9 @@ namespace Api_DnD.Data
             modelBuilder.Entity<Enchantement>().ToTable("Enchantement");
             modelBuilder.Entity<Perso>().ToTable("Perso");
             modelBuilder.Entity<Race>().ToTable("Race");
+            modelBuilder.Entity<PNJ>().ToTable("PNJ");
+            modelBuilder.Entity<Key>().ToTable("Key");
+
         }
     }
 }

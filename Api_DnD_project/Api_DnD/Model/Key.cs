@@ -2,8 +2,17 @@
 {
     public class Key
     {
-        public string key { get; set; }
+        public int Id { get; set; }
+        public string ApiKey { get; set; }
 
-        public string role { get; set; }
+        public string Role { get; set; }
+
+        public Key(string apiKey, string role) 
+        {
+            ApiKey = apiKey;
+            Role = role;
+        }
+
+        public Key() { }
     }
 }

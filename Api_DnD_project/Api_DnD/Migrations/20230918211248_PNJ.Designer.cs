@@ -3,6 +3,7 @@ using System;
 using Api_DnD.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Api_DnD.Migrations
 {
     [DbContext(typeof(DNDContext))]
-    partial class DNDContextModelSnapshot : ModelSnapshot
+    [Migration("20230918211248_PNJ")]
+    partial class PNJ
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -132,64 +135,6 @@ namespace Api_DnD.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Enchantement", (string)null);
-                });
-
-            modelBuilder.Entity("Api_DnD.Model.Key", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<string>("ApiKey")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("Role")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Key", (string)null);
-                });
-
-            modelBuilder.Entity("Api_DnD.Model.PNJ", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<int>("Barbe")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Bouche")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Cheveux")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Nez")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Quête")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<int>("Sourcil")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Tete")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Yeux1")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Yeux2")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("PNJ", (string)null);
                 });
 
             modelBuilder.Entity("Api_DnD.Model.Perso", b =>
