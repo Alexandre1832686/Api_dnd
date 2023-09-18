@@ -37,5 +37,17 @@
         {
             throw new NotImplementedException();
         }
+
+        public static Enchantement EnchantementToEnchantement(Enchantement e)
+        {
+            return new Enchantement
+            {
+                Nom = e.Nom,
+                Description = e.Description,
+                Type = e.Type,
+                Modif = e.Modif,
+                Id = e.Id
+            }
+        }
     }
 }
