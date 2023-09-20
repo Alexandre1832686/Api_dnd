@@ -9,6 +9,8 @@
         public string Nom { get; set; }
 
         public Enchantement Enchantement { get; set; }
+        public Campagne Campagne { get; set; }
+
 
         public int id { get; set; }
 

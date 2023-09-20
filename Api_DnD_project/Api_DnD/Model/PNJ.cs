@@ -9,6 +9,7 @@
         public string Name;
         
         public string[] Quête { get; set; }
+        public Campagne Campagne { get; set; }
 
         public PNJ(int[] physique, string description, string name, string[] quête)
         {

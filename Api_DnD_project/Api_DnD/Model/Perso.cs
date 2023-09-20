@@ -4,15 +4,14 @@ namespace Api_DnD.Model
 {
     public class Perso
     {
+        public string IrlJoueur { get; set; }
         public string Nom { get; set; }
         public string Description { get; set; }
         public int inspiration { get; set; }
-
-        public int armureId { get; set; }
-        public int armeId { get; set; }
-
         public Armure armure { get; set; }
-        public Arme arme { get; set; }
+        public Arme arme1 { get; set; }
+        public Arme arme2 { get; set; }
+        public Arme arme3 { get; set; }
         public Classes classes { get; set; }
         public Race race { get; set; }
         public List<Skill> skills { get; set; }
@@ -22,6 +21,7 @@ namespace Api_DnD.Model
         public string flaws { get; set; }
         public int niv { get; set; }
         public int id { get; set; }
+        public Campagne campagne { get; set; }
 
         public int[] GetStats()
         {

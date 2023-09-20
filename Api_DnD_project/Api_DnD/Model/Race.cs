@@ -10,6 +10,8 @@
         public int BonusWisdom { get; set; }
         public int BonusConsti { get; set; }
         public int Id { get; set; }
+        public Campagne Campagne { get; set; }
+
 
         public Race GetRaceByName(int id)
         {
