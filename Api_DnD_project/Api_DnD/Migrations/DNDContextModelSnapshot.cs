@@ -134,6 +134,72 @@ namespace Api_DnD.Migrations
                     b.ToTable("Enchantement", (string)null);
                 });
 
+            modelBuilder.Entity("Api_DnD.Model.Key", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("ApiKey")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Role")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Key", (string)null);
+                });
+
+            modelBuilder.Entity("Api_DnD.Model.PNJ", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("Barbe")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Bouche")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Cheveux")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<int>("Nez")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Quete")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<int>("Sourcil")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Tete")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Yeux1")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Yeux2")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("PNJ", (string)null);
+                });
+
             modelBuilder.Entity("Api_DnD.Model.Perso", b =>
                 {
                     b.Property<int>("id")
@@ -148,7 +214,7 @@ namespace Api_DnD.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<int>("armeid")
+                    b.Property<int>("armeId")
                         .HasColumnType("int");
 
                     b.Property<int>("armureId")
@@ -184,7 +250,7 @@ namespace Api_DnD.Migrations
 
                     b.HasKey("id");
 
-                    b.HasIndex("armeid");
+                    b.HasIndex("armeId");
 
                     b.HasIndex("armureId");
 
@@ -274,7 +340,7 @@ namespace Api_DnD.Migrations
                 {
                     b.HasOne("Api_DnD.Model.Arme", "arme")
                         .WithMany()
-                        .HasForeignKey("armeid")
+                        .HasForeignKey("armeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

@@ -8,20 +8,21 @@ namespace Api_DnD.Controllers
 {
     public class KeyGenerator
     {
-        private readonly KeyContext _context;
-
-        public KeyGenerator(KeyContext context)
-        {
-            _context = context;
-        }
-
+        //private readonly KeyContext _context;
         
-        public async Task<ActionResult<IEnumerable<Key>>> GetAllKey()
-        {
 
-            //return await _context.key.Select<>.ToListAsync();
-        }
+        //public KeyGenerator(KeyContext context)
+        //{
+        //    _context = context;
+        //}
 
+        /*
+        //public async Task<ActionResult<IEnumerable<Key>>> GetAllKey()
+        //{
+
+        //    //return await _context.key.Select<>.ToListAsync();
+        //}
+        */
 
 
         internal static readonly char[] chars =

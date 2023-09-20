@@ -47,7 +47,7 @@
                 Type = e.Type,
                 Modif = e.Modif,
                 Id = e.Id
-            }
+            };
         }
     }
 }
