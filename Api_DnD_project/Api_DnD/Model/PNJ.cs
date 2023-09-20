@@ -1,4 +1,6 @@
-﻿namespace Api_DnD.Model
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Api_DnD.Model
 {
     public class PNJ
     {
@@ -11,12 +13,11 @@
         public int Tete { get; set; }
         public int Yeux1 { get; set; }
         public int Yeux2 { get; set; }
+        public string Description { get; set; }
+        public string Name { get; set; }
 
-        public string Description;
-
-        public string Name;
-        
-        public string Quête { get; set; }
+        [NotMapped]
+        public int[] DescriptionPhysique { get; set; }
 
         public PNJ(int bouche,int nez,int barbe, int cheveux,int sourcil, int tete, int yeux1,int yeux2, string description, string name, string quête)
         {
@@ -31,7 +32,9 @@
             Tete = tete;
             Yeux1 = yeux1;
             Yeux2 = yeux2;
-            Quête = quête;
+            Quete = quête;
+
+            
         }
 
         public PNJ() { }

@@ -3,6 +3,7 @@ using System;
 using Api_DnD.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Api_DnD.Migrations
 {
     [DbContext(typeof(DNDContext))]
-    partial class DNDContextModelSnapshot : ModelSnapshot
+    [Migration("20230920135556_correctionVariable")]
+    partial class correctionVariable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -167,14 +170,6 @@ namespace Api_DnD.Migrations
 
                     b.Property<int>("Cheveux")
                         .HasColumnType("int");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("longtext");
 
                     b.Property<int>("Nez")
                         .HasColumnType("int");
