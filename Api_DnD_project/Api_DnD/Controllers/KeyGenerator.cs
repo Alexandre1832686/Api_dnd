@@ -9,7 +9,7 @@ namespace Api_DnD.Controllers
     public class KeyGenerator
     {
         //private readonly KeyContext _context;
-        private readonly KeyContext _context;
+        
 
         //public KeyGenerator(KeyContext context)
         //{
