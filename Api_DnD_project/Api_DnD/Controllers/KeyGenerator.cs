@@ -15,13 +15,13 @@ namespace Api_DnD.Controllers
             _context = context;
         }
 
-        
+        /*
         public async Task<ActionResult<IEnumerable<Key>>> GetAllKey()
         {
 
             //return await _context.key.Select<>.ToListAsync();
         }
-
+        */
 
 
         internal static readonly char[] chars =

@@ -1,4 +1,6 @@
-﻿namespace Api_DnD.Model
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Api_DnD.Model
 {
     public class Arme
     {
@@ -8,6 +10,9 @@
 
         public string Nom { get; set; }
 
+        public int EnchantementId { get; set; }
+
+        [ForeignKey("EnchantementId")]
         public Enchantement Enchantement { get; set; }
 
         public int id { get; set; }

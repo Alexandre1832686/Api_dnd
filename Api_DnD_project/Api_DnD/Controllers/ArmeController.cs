@@ -18,10 +18,16 @@ namespace Api_DnD.Controllers
             _context = context;
         }
 
-        [HttpGet("/AllArmes")]
-        public async Task<ActionResult<IEnumerable<Arme>>> GetAllArmes()
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Arme>>> GetArme()
         {
             return await _context.Armes.Include(x => x.Enchantement).Select(x => Arme.ArmeToArme(x)).ToListAsync();
+        }
+
+        [HttpGet("/{id}")]
+        public async Task<ActionResult<Arme>> GetArme(int id)
+        {
+            return await _context.Armes.FindAsync(id);
         }
 
         [HttpGet("/BaseArme/{id}")]
@@ -37,24 +43,27 @@ namespace Api_DnD.Controllers
             return ArmeDTO.ArmeToDTO(arme);
         }
 
-        [HttpPost("/CreateArme/{bonusJet}/{bonusForce}/{nom}/{enchantementId}")]
-        public async void CreateArme(int bonusJet, int bonusForce, string nom, int enchantementId)
+        [HttpPut("/EditArme")]
+        public async Task<ActionResult<Arme>> EditArme(int Id, int bonusJet, int bonusForce, string nom, int enchantementId)
         {
-            Enchantement enchantement = await _context.Enchantements.Where(e => e.Id.Equals(enchantementId)).Select(e => Enchantement.EnchantementToEnchantement(e)).FirstOrDefaultAsync();
-
-            await _context.Armes.AddAsync(new Arme { BonusJet = bonusJet, BonusForce = bonusForce, Nom = nom, Enchantement = enchantement });
-        }
-
-        [HttpPut("/EditArme/{Id}/{bonusJet}/{bonusForce}/{nom}/{enchantementId}")]
-        public async void EditArme(int Id, int bonusJet, int bonusForce, string nom, int enchantementId)
-        {
-            Enchantement enchantement = await _context.Enchantements.Where(e => e.Id.Equals(enchantementId)).Select(e => Enchantement.EnchantementToEnchantement(e)).FirstOrDefaultAsync();
-
             await _context.Armes.Where(a => a.id == Id).ExecuteUpdateAsync(setters => setters
             .SetProperty(a => a.BonusJet, bonusJet)
             .SetProperty(a => a.BonusForce, bonusForce)
             .SetProperty(a => a.Nom, nom)
-            .SetProperty(a => a.Enchantement, enchantement));
+            .SetProperty(a => a.EnchantementId, enchantementId));
+
+            return NoContent();
+        }
+
+        [HttpPost("/CreateArme")]
+        public async Task<ActionResult<Arme>> CreateArme(int bonusJet, int bonusForce, string nom, int enchantementId)
+        {
+            Arme armeCree = new Arme { BonusJet = bonusJet, BonusForce = bonusForce, Nom = nom, EnchantementId = enchantementId};
+
+            _context.Armes.Add(armeCree);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction("GetArme", new {id = armeCree.id}, armeCree);
         }
 
         // POST: ArmeController/Delete/5

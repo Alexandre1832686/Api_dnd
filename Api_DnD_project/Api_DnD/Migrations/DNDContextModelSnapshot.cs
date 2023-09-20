@@ -148,7 +148,7 @@ namespace Api_DnD.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<int>("armeid")
+                    b.Property<int>("armeId")
                         .HasColumnType("int");
 
                     b.Property<int>("armureId")
@@ -184,7 +184,7 @@ namespace Api_DnD.Migrations
 
                     b.HasKey("id");
 
-                    b.HasIndex("armeid");
+                    b.HasIndex("armeId");
 
                     b.HasIndex("armureId");
 
@@ -274,7 +274,7 @@ namespace Api_DnD.Migrations
                 {
                     b.HasOne("Api_DnD.Model.Arme", "arme")
                         .WithMany()
-                        .HasForeignKey("armeid")
+                        .HasForeignKey("armeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
