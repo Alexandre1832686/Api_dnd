@@ -11,16 +11,15 @@ namespace Api_DnD.Data
         }
 
         public DbSet<Arme> Armes { get; set; }
+        // Ambiguïté entre System.Action et notre objet Action
+        public DbSet<Api_DnD.Model.Action> Actions { get; set; }
         public DbSet<Armure> Armures { get; set; }
         public DbSet<Classes> Classes { get; set; }
         public DbSet<Enchantement> Enchantements { get; set; }
         public DbSet<Perso> Persos { get; set; }
         public DbSet<Race> Races { get; set; }
-
         public DbSet<PNJ> PNJ { get; set; }
-
         public DbSet<Key> Key {get;set;}
-
         public DbSet<Monstre> Monstres { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

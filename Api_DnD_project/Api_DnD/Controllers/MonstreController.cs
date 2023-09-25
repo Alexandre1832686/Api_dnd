@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 namespace Api_DnD.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Microsoft.AspNetCore.Mvc.Route("[controller]")]
     public class MonstreController : Controller
     {
         private readonly DNDContext _context;
@@ -21,9 +21,10 @@ namespace Api_DnD.Controllers
         public async Task<ActionResult<IEnumerable<Monstre>>> GetMonstre()
         {
             return await _context.Monstres
-                .Include(x => x.Race)
-                .Include(x => x.ListAction)
-                .Include(x => x.Campagne).ToListAsync();
+                .Include(m => m.Race)
+                .Include(m => m.Campagne)
+                .Include(m => m.Actions)
+                .ToListAsync();
         }
 
         [HttpGet("/{id}")]
@@ -32,10 +33,56 @@ namespace Api_DnD.Controllers
             return await _context.Monstres.FindAsync(id);
         }
 
-        // Besoin de savoir comment on va arranger la base de données pour les Monstres avant de continuer
-        /*
         [HttpPut("/EditMonstre")] 
-        public async Task<ActionResult<Monstre>> EditMonstre(int )
-        */
+        public async Task<ActionResult<Monstre>> EditMonstre(int id, Monstre monstre)
+        {
+            await _context.Monstres.Where(m => m.Id == id).ExecuteUpdateAsync(setters => setters
+            .SetProperty(m => m.Nom, monstre.Nom)
+            .SetProperty(m => m.Size, monstre.Size)
+            .SetProperty(m => m.Race, monstre.Race)
+            .SetProperty(m => m.ArmorClass, monstre.ArmorClass)
+            .SetProperty(m => m.HitPoint, monstre.HitPoint)
+            .SetProperty(m => m.Speed, monstre.Speed)
+            .SetProperty(m => m.FlySpeed, monstre.FlySpeed)
+            .SetProperty(m => m.ClimbSpeed, monstre.ClimbSpeed)
+            .SetProperty(m => m.Str, monstre.Str)
+            .SetProperty(m => m.Dex, monstre.Dex)
+            .SetProperty(m => m.Con, monstre.Con)
+            .SetProperty(m => m.Intel, monstre.Intel)
+            .SetProperty(m => m.Wis, monstre.Wis)
+            .SetProperty(m => m.Cha, monstre.Cha)
+            .SetProperty(m => m.DarkVision, monstre.DarkVision)
+            .SetProperty(m => m.Challenge, monstre.Challenge)
+            .SetProperty(m => m.Lang, monstre.Lang)
+            .SetProperty(m => m.DammageResistance, monstre.DammageResistance)
+            .SetProperty(m => m.DammageImmunities, monstre.DammageImmunities)
+            .SetProperty(m => m.Actions, monstre.Actions)
+            .SetProperty(m => m.Campagne, monstre.Campagne)
+            );
+
+            return NoContent();
+        }
+
+        [HttpPost("/CreateArme")]
+        public async Task<ActionResult<Monstre>> CreateMonstre(Monstre monstre)
+        {
+            _context.Monstres.Add(monstre);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction("GetMonstre", new { id = monstre.Id }, monstre);
+        }
+
+        [HttpDelete("/DeleteMonstre/{id}")]
+        public async Task<bool> Delete(int id)
+        {
+            if(await _context.Monstres.Where(m => m.Id.Equals(id)).ExecuteDeleteAsync() == 1)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }

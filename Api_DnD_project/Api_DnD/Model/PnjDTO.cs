@@ -4,7 +4,7 @@
     {
         public string Nom { get; set; }
         public int[] DescriptionPhysique { get; set; }
-        public string Quete { get; set; }
+        public Quete Quete { get; set; }
 
         
         public PnjDTO()
