@@ -24,6 +24,7 @@
         public string DammageImmunities { get; set; }
         public string ConditionImmunities { get; set; }
         public List<Action> ListAction { get; set; }
-        public Campagne Campagne { get; set; }
+        public ICollection<Campagne> Campagne { get; set; }
+
     }
 }

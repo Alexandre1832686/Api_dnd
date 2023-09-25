@@ -9,7 +9,8 @@ namespace Api_DnD.Model
         public string hitDie { get; set; }
         public string primaryAbility { get; set; }
         public int id { get; set; }
-        public Campagne Campagne { get; set; }
+        public ICollection<Campagne> Campagne { get; set; }
+
 
 
         public Classes GetClassesById(int id)

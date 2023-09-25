@@ -7,6 +7,8 @@
         public string Type { get; set; }
         public int Modif { get; set; }
         public int Id { get; set; }
+        public ICollection<Campagne> Campagne { get; set; }
+
 
         public Enchantement GetEnchantementById(int id)
         {

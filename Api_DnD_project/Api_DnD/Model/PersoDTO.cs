@@ -5,6 +5,7 @@
         public string Nom { get; set; }
         public int niv { get; set; }
         public int id { get; set; }
+        
 
         public PersoDTO() { }
 

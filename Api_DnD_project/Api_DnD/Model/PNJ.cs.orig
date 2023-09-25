@@ -15,13 +15,20 @@ namespace Api_DnD.Model
         public int Yeux2 { get; set; }
         public string Description { get; set; }
         public string Name { get; set; }
-        public ICollection<Campagne> Campagne { get; set; }
-
 
         [NotMapped]
         public int[] DescriptionPhysique { get; set; }
 
+<<<<<<< HEAD
+        public string Name;
+        
+        public string[] Quête { get; set; }
+        public Campagne Campagne { get; set; }
+
+        public PNJ(int[] physique, string description, string name, string[] quête)
+=======
         public PNJ(int bouche,int nez,int barbe, int cheveux,int sourcil, int tete, int yeux1,int yeux2, string description, string name, string quête)
+>>>>>>> aab37933623874df98c7a9d2e4d6844f6c2bd4bf
         {
             
             Description = description;

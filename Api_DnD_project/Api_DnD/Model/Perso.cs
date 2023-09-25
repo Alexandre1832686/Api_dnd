@@ -21,7 +21,9 @@ namespace Api_DnD.Model
         public string flaws { get; set; }
         public int niv { get; set; }
         public int id { get; set; }
-        public Campagne campagne { get; set; }
+        public ICollection<Campagne> Campagne { get; set; }
+
+
 
         public int[] GetStats()
         {
