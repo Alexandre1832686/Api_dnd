@@ -1,8 +1,8 @@
 ﻿using Api_DnD.Data;
 using Api_DnD.Model;
-using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Http;
 
 namespace Api_DnD.Controllers
 {
@@ -18,7 +18,7 @@ namespace Api_DnD.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Monstre>>> GetMonstre()
+        public async Task<ActionResult<IEnumerable<Monstre>>> GetMonstres()
         {
             return await _context.Monstres
                 .Include(x => x.Race)
@@ -26,8 +26,8 @@ namespace Api_DnD.Controllers
                 .Include(x => x.Campagne).ToListAsync();
         }
 
-        [HttpGet("/{id}")]
-        public async Task<ActionResult<Monstre>> GetMonstre(int id)
+        [HttpGet("GetMonstreById/{id}")]
+        public async Task<ActionResult<Monstre?>> GetMonstre(int id)
         {
             return await _context.Monstres.FindAsync(id);
         }
@@ -35,7 +35,7 @@ namespace Api_DnD.Controllers
         // Besoin de savoir comment on va arranger la base de données pour les Monstres avant de continuer
         /*
         [HttpPut("/EditMonstre")] 
-        public async Task<ActionResult<Monstre>> EditMonstre(int )
+        public async Task<ActionResult<Monstre>> EditMonstre(int)
         */
     }
 }

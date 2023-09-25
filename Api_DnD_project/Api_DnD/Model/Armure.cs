@@ -18,5 +18,10 @@
         public Campagne Campagne { get; set; }
 
         public int Id { get; set; }
+
+        //public Armure ArmureToArmure()
+        //{
+
+        //}
     }
 }

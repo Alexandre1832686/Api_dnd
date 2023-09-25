@@ -52,7 +52,7 @@ namespace Api_DnD.Model
                 Description = x.Description,
                 inspiration = x.inspiration,
                 armure = x.armure,
-                arme = x.arme,
+                arme1 = x.arme1,
                 classes = x.classes,
                 race = x.race,
                 skills = x.skills,

@@ -24,7 +24,7 @@ namespace Api_DnD.Controllers
         public async Task<ActionResult<IEnumerable<Perso>>> GetAllPerso()
         {
 
-            return await _context.Persos.Include(x => x.arme).Include(x=>x.arme.Enchantement).Include(x => x.armure).Include(x=>x.armure.Enchant)
+            return await _context.Persos.Include(x => x.arme1).Include(x=>x.arme1.Enchantement).Include(x => x.armure).Include(x=>x.armure.Enchant)
                 .Select( x => Perso.PersoToPerso(x))
                 .ToListAsync();
         }
