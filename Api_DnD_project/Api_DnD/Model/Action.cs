@@ -1,8 +1,10 @@
-﻿namespace Api_DnD.Model
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Api_DnD.Model
 {
     public class Action
     {
-        public List<Monstre> ListeMonstre { get; set; }
+        public ICollection<Monstre> Monstres { get; set; }
         public string Type { get; set; }
         public int Id { get; set; }
         public string Name { get; set; }

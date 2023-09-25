@@ -1,4 +1,6 @@
-﻿namespace Api_DnD.Model
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Api_DnD.Model
 {
     public class Monstre
     {
@@ -23,7 +25,7 @@
         public string DammageResistance { get; set; }
         public string DammageImmunities { get; set; }
         public string ConditionImmunities { get; set; }
-        public List<Action> ListAction { get; set; }
+        public ICollection<Action> Actions { get; set; }
         public ICollection<Campagne> Campagne { get; set; }
 
     }
