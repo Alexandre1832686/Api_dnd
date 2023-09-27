@@ -7,10 +7,7 @@
         public Quete Quete { get; set; }
 
         
-        public PnjDTO()
-        {
-
-        }
+        public PnjDTO() {}
 
         public static PnjDTO PnjToPnjDTO(PNJ? p)
         {
