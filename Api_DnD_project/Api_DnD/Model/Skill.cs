@@ -3,7 +3,7 @@
     public class Skill
     {
         public int id { get; set; }
-        public string desc { get; set; }
-        public string nom { get; set; }
+        public string Desc { get; set; }
+        public string Nom { get; set; }
     }
 }

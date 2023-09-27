@@ -7,6 +7,8 @@ namespace Api_DnD.Model
         public int Id { get; set; }
         public string Nom { get; set; }
         public string Size { get; set; }
+        public int RaceId { get; set; }
+        [ForeignKey("RaceId")]
         public Race Race { get; set; }
         public int ArmorClass { get; set; }
         public int HitPoint { get; set; }

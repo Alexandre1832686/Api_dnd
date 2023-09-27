@@ -15,6 +15,8 @@ namespace Api_DnD.Model
         public int Yeux2 { get; set; }
         public string Description { get; set; }
         public string Name { get; set; }
+        public int QueteId { get; set; }
+        [ForeignKey("QueteId")]
         public Quete Quete { get; set; }
         public ICollection<Campagne> Campagne { get; set; }
 
