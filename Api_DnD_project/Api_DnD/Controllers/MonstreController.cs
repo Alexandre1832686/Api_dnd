@@ -10,6 +10,7 @@ namespace Api_DnD.Controllers
     [Microsoft.AspNetCore.Mvc.Route("[controller]")]
     public class MonstreController : Controller
     {
+        
         private readonly DNDContext _context;
 
         public MonstreController(DNDContext context)
@@ -27,12 +28,13 @@ namespace Api_DnD.Controllers
                 .ToListAsync();
         }
 
-        [HttpGet("GetMonstreById/{id}")]
+        [HttpGet("/GetMonstreById/{id}")]
         public async Task<ActionResult<Monstre?>> GetMonstre(int id)
         {
             return await _context.Monstres.FindAsync(id);
         }
 
+        
         [HttpPut("/EditMonstre")] 
         public async Task<ActionResult<Monstre>> EditMonstre(int id, Monstre monstre)
         {
@@ -62,8 +64,9 @@ namespace Api_DnD.Controllers
 
             return NoContent();
         }
+        
 
-        [HttpPost("/CreateArme")]
+        [HttpPost("/CreateMonstre")]
         public async Task<ActionResult<Monstre>> CreateMonstre(Monstre monstre)
         {
             _context.Monstres.Add(monstre);
@@ -73,7 +76,7 @@ namespace Api_DnD.Controllers
         }
 
         [HttpDelete("/DeleteMonstre/{id}")]
-        public async Task<bool> Delete(int id)
+        public async Task<bool> DeleteMonstre(int id)
         {
             if(await _context.Monstres.Where(m => m.Id.Equals(id)).ExecuteDeleteAsync() == 1)
             {
@@ -84,5 +87,6 @@ namespace Api_DnD.Controllers
                 return false;
             }
         }
+        
     }
 }

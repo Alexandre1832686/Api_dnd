@@ -8,7 +8,7 @@ namespace Api_DnD.Controllers
     [Route("[controller]")]
     public class CampagneController : Controller
     {
-
+        /*
 
         private readonly DNDContext _context;
 
@@ -79,5 +79,6 @@ namespace Api_DnD.Controllers
                 return false;
             }
         }
+        */
     }
 }

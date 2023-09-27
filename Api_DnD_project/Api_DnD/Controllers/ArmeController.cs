@@ -24,7 +24,7 @@ namespace Api_DnD.Controllers
             return await _context.Armes.Include(x => x.Enchantement).Select(x => Arme.ArmeToArme(x)).ToListAsync();
         }
 
-        [HttpGet("/{id}")]
+        [HttpGet("/GetArme/{id}")]
         public async Task<ActionResult<Arme>> GetArme(int id)
         {
             return await _context.Armes.FindAsync(id);
@@ -69,7 +69,7 @@ namespace Api_DnD.Controllers
         // POST: ArmeController/Delete/5
         // Si une entrée est trouvée et supprimée, la valeur true est retournée, sinon c'est la valeur false
         [HttpDelete("/DeleteArme/{id}")]
-        public async Task<bool> Delete(int id)
+        public async Task<bool> DeleteArme(int id)
         {
             if (await _context.Armes.Where(a => a.id.Equals(id)).ExecuteDeleteAsync() == 1)
             {
