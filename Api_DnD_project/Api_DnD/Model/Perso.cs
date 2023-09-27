@@ -12,7 +12,7 @@ namespace Api_DnD.Model
         public int ArmureId { get; set; }
         [ForeignKey("ArmureId")]
         public Armure Armure { get; set; }
-        public ICollection<Arme> LesArmes { get; set; }
+        public ICollection<Arme>? LesArmes { get; set; }
         public int ClasseId { get; set; }
         [ForeignKey("ClasseId")]
         public Classes Classes { get; set; }

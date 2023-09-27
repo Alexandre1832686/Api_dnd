@@ -25,14 +25,9 @@ namespace Api_DnD.Controllers
         {
 
             return await _context.Persos
-                .Include(p => p.arme1)
-                .Include(p=>p.arme1.Enchantement)
-                .Include(p => p.arme2)
-                .Include(p => p.arme2.Enchantement)
-                .Include(p => p.arme3)
-                .Include(p => p.arme3.Enchantement)
-                .Include(p => p.armure)
-                .Include(x=>x.armure.Enchant)
+                .Include(p => p.LesArmes)
+                .Include(p => p.Armure)
+                .Include(x=>x.Armure.Enchantement)
                 .Select( x => Perso.PersoToPerso(x))
                 .ToListAsync();
         }

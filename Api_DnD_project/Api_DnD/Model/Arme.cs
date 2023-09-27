@@ -14,10 +14,6 @@ namespace Api_DnD.Model
 
         [ForeignKey("EnchantementId")]
         public Enchantement Enchantement { get; set; }
-
-        public int CampagneId { get; set; }
-
-        [ForeignKey("CampagneId")]
         public ICollection<Campagne> Campagne { get; set; }
 
 
@@ -31,7 +27,7 @@ namespace Api_DnD.Model
                 BonusJet = a.BonusJet,
                 BonusForce = a.BonusForce,
                 Nom = a.Nom,
-                Enchantement = a.Enchantement,
+                Enchantement=a.Enchantement,
                 id = a.id
             };
        }

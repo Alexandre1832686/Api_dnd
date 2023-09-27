@@ -18,10 +18,10 @@ namespace Api_DnD.Controllers
             _context = context;
         }
 
-        [HttpGet]
+        [HttpGet("/GetAllArme")]
         public async Task<ActionResult<IEnumerable<Arme>>> GetArme()
         {
-            return await _context.Armes.Include(x => x.Enchantement).Select(x => Arme.ArmeToArme(x)).ToListAsync();
+            return await _context.Armes.Include(x=>x.Enchantement).Select(x => Arme.ArmeToArme(x)).ToListAsync();
         }
 
         [HttpGet("/GetArme/{id}")]
