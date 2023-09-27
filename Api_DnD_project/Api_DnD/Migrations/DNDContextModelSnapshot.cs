@@ -96,9 +96,14 @@ namespace Api_DnD.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
+                    b.Property<int?>("Persoid")
+                        .HasColumnType("int");
+
                     b.HasKey("id");
 
                     b.HasIndex("EnchantementId");
+
+                    b.HasIndex("Persoid");
 
                     b.ToTable("Arme", (string)null);
                 });
@@ -115,7 +120,7 @@ namespace Api_DnD.Migrations
                     b.Property<bool>("DexBonus")
                         .HasColumnType("tinyint(1)");
 
-                    b.Property<int>("EnchantId")
+                    b.Property<int>("EnchantementId")
                         .HasColumnType("int");
 
                     b.Property<int>("MaxDexMod")
@@ -134,7 +139,7 @@ namespace Api_DnD.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("EnchantId");
+                    b.HasIndex("EnchantementId");
 
                     b.ToTable("Armure", (string)null);
                 });
@@ -363,71 +368,56 @@ namespace Api_DnD.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<int>("ArmureId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Bonds")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<int>("ClasseId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("longtext");
+
+                    b.Property<string>("Flaws")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Ideal")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<int>("Inspiration")
+                        .HasColumnType("int");
 
                     b.Property<string>("IrlJoueur")
                         .IsRequired()
                         .HasColumnType("longtext");
 
+                    b.Property<int>("Niv")
+                        .HasColumnType("int");
+
                     b.Property<string>("Nom")
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<int>("arme1id")
-                        .HasColumnType("int");
-
-                    b.Property<int>("arme2id")
-                        .HasColumnType("int");
-
-                    b.Property<int>("arme3id")
-                        .HasColumnType("int");
-
-                    b.Property<int>("armureId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("bonds")
+                    b.Property<string>("Personalitetrait")
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<int>("classesid")
-                        .HasColumnType("int");
-
-                    b.Property<string>("flaws")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("ideal")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<int>("inspiration")
-                        .HasColumnType("int");
-
-                    b.Property<int>("niv")
-                        .HasColumnType("int");
-
-                    b.Property<string>("personalitetrait")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<int>("raceId")
+                    b.Property<int>("RaceId")
                         .HasColumnType("int");
 
                     b.HasKey("id");
 
-                    b.HasIndex("arme1id");
+                    b.HasIndex("ArmureId");
 
-                    b.HasIndex("arme2id");
+                    b.HasIndex("ClasseId");
 
-                    b.HasIndex("arme3id");
-
-                    b.HasIndex("armureId");
-
-                    b.HasIndex("classesid");
-
-                    b.HasIndex("raceId");
+                    b.HasIndex("RaceId");
 
                     b.ToTable("Perso", (string)null);
                 });
@@ -451,10 +441,9 @@ namespace Api_DnD.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PnjId")
-                        .IsUnique();
+                    b.HasIndex("PnjId");
 
-                    b.ToTable("Quete");
+                    b.ToTable("Quete", (string)null);
                 });
 
             modelBuilder.Entity("Api_DnD.Model.Race", b =>
@@ -496,16 +485,16 @@ namespace Api_DnD.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<string>("Desc")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Nom")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
                     b.Property<int?>("Persoid")
                         .HasColumnType("int");
-
-                    b.Property<string>("desc")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("nom")
-                        .IsRequired()
-                        .HasColumnType("longtext");
 
                     b.HasKey("id");
 
@@ -668,6 +657,10 @@ namespace Api_DnD.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Api_DnD.Model.Perso", null)
+                        .WithMany("LesArmes")
+                        .HasForeignKey("Persoid");
+
                     b.Navigation("Enchantement");
                 });
 
@@ -675,7 +668,7 @@ namespace Api_DnD.Migrations
                 {
                     b.HasOne("Api_DnD.Model.Enchantement", "Enchant")
                         .WithMany()
-                        .HasForeignKey("EnchantId")
+                        .HasForeignKey("EnchantementId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -702,60 +695,36 @@ namespace Api_DnD.Migrations
 
             modelBuilder.Entity("Api_DnD.Model.Perso", b =>
                 {
-                    b.HasOne("Api_DnD.Model.Arme", "arme1")
+                    b.HasOne("Api_DnD.Model.Armure", "Armure")
                         .WithMany()
-                        .HasForeignKey("arme1id")
+                        .HasForeignKey("ArmureId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Api_DnD.Model.Arme", "arme2")
+                    b.HasOne("Api_DnD.Model.Classes", "Classes")
                         .WithMany()
-                        .HasForeignKey("arme2id")
+                        .HasForeignKey("ClasseId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Api_DnD.Model.Arme", "arme3")
+                    b.HasOne("Api_DnD.Model.Race", "Race")
                         .WithMany()
-                        .HasForeignKey("arme3id")
+                        .HasForeignKey("RaceId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Api_DnD.Model.Armure", "armure")
-                        .WithMany()
-                        .HasForeignKey("armureId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Navigation("Armure");
 
-                    b.HasOne("Api_DnD.Model.Classes", "classes")
-                        .WithMany()
-                        .HasForeignKey("classesid")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Navigation("Classes");
 
-                    b.HasOne("Api_DnD.Model.Race", "race")
-                        .WithMany()
-                        .HasForeignKey("raceId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("arme1");
-
-                    b.Navigation("arme2");
-
-                    b.Navigation("arme3");
-
-                    b.Navigation("armure");
-
-                    b.Navigation("classes");
-
-                    b.Navigation("race");
+                    b.Navigation("Race");
                 });
 
             modelBuilder.Entity("Api_DnD.Model.Quete", b =>
                 {
                     b.HasOne("Api_DnD.Model.PNJ", "Pnj")
-                        .WithOne("Quete")
-                        .HasForeignKey("Api_DnD.Model.Quete", "PnjId")
+                        .WithMany("Quetes")
+                        .HasForeignKey("PnjId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -765,7 +734,7 @@ namespace Api_DnD.Migrations
             modelBuilder.Entity("Api_DnD.Model.Skill", b =>
                 {
                     b.HasOne("Api_DnD.Model.Perso", null)
-                        .WithMany("skills")
+                        .WithMany("Skills")
                         .HasForeignKey("Persoid");
                 });
 
@@ -891,15 +860,16 @@ namespace Api_DnD.Migrations
 
             modelBuilder.Entity("Api_DnD.Model.PNJ", b =>
                 {
-                    b.Navigation("Quete")
-                        .IsRequired();
+                    b.Navigation("Quetes");
                 });
 
             modelBuilder.Entity("Api_DnD.Model.Perso", b =>
                 {
                     b.Navigation("Campagne");
 
-                    b.Navigation("skills");
+                    b.Navigation("LesArmes");
+
+                    b.Navigation("Skills");
                 });
 #pragma warning restore 612, 618
         }

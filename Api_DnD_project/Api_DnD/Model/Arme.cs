@@ -14,6 +14,8 @@ namespace Api_DnD.Model
 
         [ForeignKey("EnchantementId")]
         public Enchantement Enchantement { get; set; }
+
+
         public ICollection<Campagne> Campagne { get; set; }
 
 
