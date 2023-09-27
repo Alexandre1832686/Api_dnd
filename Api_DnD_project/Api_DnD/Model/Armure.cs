@@ -1,4 +1,6 @@
-﻿namespace Api_DnD.Model
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Api_DnD.Model
 {
     public class Armure
     {
@@ -14,6 +16,9 @@
 
         public bool StealthDisadvantage { get; set; }
 
+        public int EnchantementId { get; set; }
+
+        [ForeignKey("EnchantementId")]
         public Enchantement Enchant { get; set; }
         public ICollection<Campagne> Campagne { get; set; }
 

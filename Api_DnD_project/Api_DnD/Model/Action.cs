@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Api_DnD.Model
 {
@@ -13,7 +14,10 @@ namespace Api_DnD.Model
         public string DammageType { get; set; }
         public int Dc { get; set; }
         public string DcType { get; set; }
+        public int CampagneId { get; set; }
+        [ForeignKey("CampagneId")]
         public Campagne Campagne { get; set; }
+
 
     }
 }
