@@ -38,8 +38,8 @@ namespace Api_DnD.Controllers
         }
 
         // GET: PersoController/Create
-        [HttpGet ("/BasePerso")]
-        public async Task<ActionResult<PersoDTO>> GetBaseInfo(int id)
+        [HttpGet ("/BaseInfoPerso/{id}")]
+        public async Task<ActionResult<PersoDTO>> GetBaseInfoPerso(int id)
         {
             var perso = await _context.Persos.FindAsync(id);
 
