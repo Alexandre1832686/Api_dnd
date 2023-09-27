@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Api_DnD.Migrations
 {
     [DbContext(typeof(DNDContext))]
-    [Migration("20230925212328_initial")]
-    partial class initial
+    [Migration("20230927144835_ComeOnManLetsGo")]
+    partial class ComeOnManLetsGo
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -92,9 +92,6 @@ namespace Api_DnD.Migrations
                     b.Property<int>("BonusJet")
                         .HasColumnType("int");
 
-                    b.Property<int>("CampagneId")
-                        .HasColumnType("int");
-
                     b.Property<int>("EnchantementId")
                         .HasColumnType("int");
 
@@ -102,11 +99,14 @@ namespace Api_DnD.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
+                    b.Property<int?>("Persoid")
+                        .HasColumnType("int");
+
                     b.HasKey("id");
 
-                    b.HasIndex("CampagneId");
-
                     b.HasIndex("EnchantementId");
+
+                    b.HasIndex("Persoid");
 
                     b.ToTable("Arme", (string)null);
                 });
@@ -120,13 +120,10 @@ namespace Api_DnD.Migrations
                     b.Property<int>("Ac")
                         .HasColumnType("int");
 
-                    b.Property<int>("CampagneId")
-                        .HasColumnType("int");
-
                     b.Property<bool>("DexBonus")
                         .HasColumnType("tinyint(1)");
 
-                    b.Property<int>("EnchantId")
+                    b.Property<int>("EnchantementId")
                         .HasColumnType("int");
 
                     b.Property<int>("MaxDexMod")
@@ -145,9 +142,7 @@ namespace Api_DnD.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CampagneId");
-
-                    b.HasIndex("EnchantId");
+                    b.HasIndex("EnchantementId");
 
                     b.ToTable("Armure", (string)null);
                 });
@@ -166,18 +161,20 @@ namespace Api_DnD.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
+                    b.Property<int?>("Persoid")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
-                    b.ToTable("Campagne");
+                    b.HasIndex("Persoid");
+
+                    b.ToTable("Campagne", (string)null);
                 });
 
             modelBuilder.Entity("Api_DnD.Model.Classes", b =>
                 {
                     b.Property<int>("id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<int>("CampagneId")
                         .HasColumnType("int");
 
                     b.Property<string>("description")
@@ -197,8 +194,6 @@ namespace Api_DnD.Migrations
                         .HasColumnType("longtext");
 
                     b.HasKey("id");
-
-                    b.HasIndex("CampagneId");
 
                     b.ToTable("Classes", (string)null);
                 });
@@ -255,9 +250,6 @@ namespace Api_DnD.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("ArmorClass")
-                        .HasColumnType("int");
-
-                    b.Property<int>("CampagneId")
                         .HasColumnType("int");
 
                     b.Property<int>("Cha")
@@ -325,8 +317,6 @@ namespace Api_DnD.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CampagneId");
-
                     b.HasIndex("RaceId");
 
                     b.ToTable("Monstre", (string)null);
@@ -381,76 +371,56 @@ namespace Api_DnD.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<int>("ArmureId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Bonds")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<int>("ClasseId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("longtext");
+
+                    b.Property<string>("Flaws")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Ideal")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<int>("Inspiration")
+                        .HasColumnType("int");
 
                     b.Property<string>("IrlJoueur")
                         .IsRequired()
                         .HasColumnType("longtext");
 
+                    b.Property<int>("Niv")
+                        .HasColumnType("int");
+
                     b.Property<string>("Nom")
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<int>("arme1id")
-                        .HasColumnType("int");
-
-                    b.Property<int>("arme2id")
-                        .HasColumnType("int");
-
-                    b.Property<int>("arme3id")
-                        .HasColumnType("int");
-
-                    b.Property<int>("armureId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("bonds")
+                    b.Property<string>("Personalitetrait")
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<int>("campagneId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("classesid")
-                        .HasColumnType("int");
-
-                    b.Property<string>("flaws")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("ideal")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<int>("inspiration")
-                        .HasColumnType("int");
-
-                    b.Property<int>("niv")
-                        .HasColumnType("int");
-
-                    b.Property<string>("personalitetrait")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<int>("raceId")
+                    b.Property<int>("RaceId")
                         .HasColumnType("int");
 
                     b.HasKey("id");
 
-                    b.HasIndex("arme1id");
+                    b.HasIndex("ArmureId");
 
-                    b.HasIndex("arme2id");
+                    b.HasIndex("ClasseId");
 
-                    b.HasIndex("arme3id");
-
-                    b.HasIndex("armureId");
-
-                    b.HasIndex("campagneId");
-
-                    b.HasIndex("classesid");
-
-                    b.HasIndex("raceId");
+                    b.HasIndex("RaceId");
 
                     b.ToTable("Perso", (string)null);
                 });
@@ -474,10 +444,9 @@ namespace Api_DnD.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PnjId")
-                        .IsUnique();
+                    b.HasIndex("PnjId");
 
-                    b.ToTable("Quete");
+                    b.ToTable("Quete", (string)null);
                 });
 
             modelBuilder.Entity("Api_DnD.Model.Race", b =>
@@ -504,16 +473,11 @@ namespace Api_DnD.Migrations
                     b.Property<int>("BonusWisdom")
                         .HasColumnType("int");
 
-                    b.Property<int>("CampagneId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Nom")
                         .IsRequired()
                         .HasColumnType("longtext");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CampagneId");
 
                     b.ToTable("Race", (string)null);
                 });
@@ -524,18 +488,142 @@ namespace Api_DnD.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int?>("Persoid")
-                        .HasColumnType("int");
-
-                    b.Property<string>("desc")
+                    b.Property<string>("Desc")
                         .IsRequired()
                         .HasColumnType("longtext");
+
+                    b.Property<string>("Nom")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<int?>("Persoid")
+                        .HasColumnType("int");
 
                     b.HasKey("id");
 
                     b.HasIndex("Persoid");
 
                     b.ToTable("Skill");
+                });
+
+            modelBuilder.Entity("ArmeCampagne", b =>
+                {
+                    b.Property<int>("Armesid")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CampagneId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Armesid", "CampagneId");
+
+                    b.HasIndex("CampagneId");
+
+                    b.ToTable("ArmeCampagne");
+                });
+
+            modelBuilder.Entity("ArmureCampagne", b =>
+                {
+                    b.Property<int>("ArmuresId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CampagneId")
+                        .HasColumnType("int");
+
+                    b.HasKey("ArmuresId", "CampagneId");
+
+                    b.HasIndex("CampagneId");
+
+                    b.ToTable("ArmureCampagne");
+                });
+
+            modelBuilder.Entity("CampagneClasses", b =>
+                {
+                    b.Property<int>("CampagneId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Classesid")
+                        .HasColumnType("int");
+
+                    b.HasKey("CampagneId", "Classesid");
+
+                    b.HasIndex("Classesid");
+
+                    b.ToTable("CampagneClasses");
+                });
+
+            modelBuilder.Entity("CampagneEnchantement", b =>
+                {
+                    b.Property<int>("CampagneId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("EnchantementsId")
+                        .HasColumnType("int");
+
+                    b.HasKey("CampagneId", "EnchantementsId");
+
+                    b.HasIndex("EnchantementsId");
+
+                    b.ToTable("CampagneEnchantement");
+                });
+
+            modelBuilder.Entity("CampagneMonstre", b =>
+                {
+                    b.Property<int>("CampagneId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MonstresId")
+                        .HasColumnType("int");
+
+                    b.HasKey("CampagneId", "MonstresId");
+
+                    b.HasIndex("MonstresId");
+
+                    b.ToTable("CampagneMonstre");
+                });
+
+            modelBuilder.Entity("CampagnePNJ", b =>
+                {
+                    b.Property<int>("CampagneId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PNJsId")
+                        .HasColumnType("int");
+
+                    b.HasKey("CampagneId", "PNJsId");
+
+                    b.HasIndex("PNJsId");
+
+                    b.ToTable("CampagnePNJ");
+                });
+
+            modelBuilder.Entity("CampagneQuete", b =>
+                {
+                    b.Property<int>("CampagneId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("QuetesId")
+                        .HasColumnType("int");
+
+                    b.HasKey("CampagneId", "QuetesId");
+
+                    b.HasIndex("QuetesId");
+
+                    b.ToTable("CampagneQuete");
+                });
+
+            modelBuilder.Entity("CampagneRace", b =>
+                {
+                    b.Property<int>("CampagneId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RacesId")
+                        .HasColumnType("int");
+
+                    b.HasKey("CampagneId", "RacesId");
+
+                    b.HasIndex("RacesId");
+
+                    b.ToTable("CampagneRace");
                 });
 
             modelBuilder.Entity("ActionMonstre", b =>
@@ -566,58 +654,59 @@ namespace Api_DnD.Migrations
 
             modelBuilder.Entity("Api_DnD.Model.Arme", b =>
                 {
-                    b.HasOne("Api_DnD.Model.Campagne", "Campagne")
-                        .WithMany()
-                        .HasForeignKey("CampagneId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Api_DnD.Model.Enchantement", "Enchantement")
                         .WithMany()
                         .HasForeignKey("EnchantementId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Campagne");
+                    b.HasOne("Api_DnD.Model.Perso", null)
+                        .WithMany("LesArmes")
+                        .HasForeignKey("Persoid");
 
                     b.Navigation("Enchantement");
                 });
 
             modelBuilder.Entity("Api_DnD.Model.Armure", b =>
                 {
-                    b.HasOne("Api_DnD.Model.Campagne", "Campagne")
-                        .WithMany()
-                        .HasForeignKey("CampagneId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Api_DnD.Model.Enchantement", "Enchant")
                         .WithMany()
-                        .HasForeignKey("EnchantId")
+                        .HasForeignKey("EnchantementId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Campagne");
 
                     b.Navigation("Enchant");
                 });
 
-            modelBuilder.Entity("Api_DnD.Model.Classes", b =>
+            modelBuilder.Entity("Api_DnD.Model.Campagne", b =>
                 {
-                    b.HasOne("Api_DnD.Model.Campagne", "Campagne")
-                        .WithMany()
-                        .HasForeignKey("CampagneId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Campagne");
+                    b.HasOne("Api_DnD.Model.Perso", null)
+                        .WithMany("Campagne")
+                        .HasForeignKey("Persoid");
                 });
 
             modelBuilder.Entity("Api_DnD.Model.Monstre", b =>
                 {
-                    b.HasOne("Api_DnD.Model.Campagne", "Campagne")
+                    b.HasOne("Api_DnD.Model.Race", "Race")
                         .WithMany()
-                        .HasForeignKey("CampagneId")
+                        .HasForeignKey("RaceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Race");
+                });
+
+            modelBuilder.Entity("Api_DnD.Model.Perso", b =>
+                {
+                    b.HasOne("Api_DnD.Model.Armure", "Armure")
+                        .WithMany()
+                        .HasForeignKey("ArmureId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Api_DnD.Model.Classes", "Classes")
+                        .WithMany()
+                        .HasForeignKey("ClasseId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -627,108 +716,163 @@ namespace Api_DnD.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Campagne");
+                    b.Navigation("Armure");
+
+                    b.Navigation("Classes");
 
                     b.Navigation("Race");
-                });
-
-            modelBuilder.Entity("Api_DnD.Model.Perso", b =>
-                {
-                    b.HasOne("Api_DnD.Model.Arme", "arme1")
-                        .WithMany()
-                        .HasForeignKey("arme1id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Api_DnD.Model.Arme", "arme2")
-                        .WithMany()
-                        .HasForeignKey("arme2id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Api_DnD.Model.Arme", "arme3")
-                        .WithMany()
-                        .HasForeignKey("arme3id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Api_DnD.Model.Armure", "armure")
-                        .WithMany()
-                        .HasForeignKey("armureId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Api_DnD.Model.Campagne", "campagne")
-                        .WithMany()
-                        .HasForeignKey("campagneId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Api_DnD.Model.Classes", "classes")
-                        .WithMany()
-                        .HasForeignKey("classesid")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Api_DnD.Model.Race", "race")
-                        .WithMany()
-                        .HasForeignKey("raceId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("arme1");
-
-                    b.Navigation("arme2");
-
-                    b.Navigation("arme3");
-
-                    b.Navigation("armure");
-
-                    b.Navigation("campagne");
-
-                    b.Navigation("classes");
-
-                    b.Navigation("race");
                 });
 
             modelBuilder.Entity("Api_DnD.Model.Quete", b =>
                 {
                     b.HasOne("Api_DnD.Model.PNJ", "Pnj")
-                        .WithOne("Quete")
-                        .HasForeignKey("Api_DnD.Model.Quete", "PnjId")
+                        .WithMany("Quetes")
+                        .HasForeignKey("PnjId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Pnj");
                 });
 
-            modelBuilder.Entity("Api_DnD.Model.Race", b =>
+            modelBuilder.Entity("Api_DnD.Model.Skill", b =>
                 {
-                    b.HasOne("Api_DnD.Model.Campagne", "Campagne")
+                    b.HasOne("Api_DnD.Model.Perso", null)
+                        .WithMany("Skills")
+                        .HasForeignKey("Persoid");
+                });
+
+            modelBuilder.Entity("ArmeCampagne", b =>
+                {
+                    b.HasOne("Api_DnD.Model.Arme", null)
+                        .WithMany()
+                        .HasForeignKey("Armesid")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Api_DnD.Model.Campagne", null)
+                        .WithMany()
+                        .HasForeignKey("CampagneId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("ArmureCampagne", b =>
+                {
+                    b.HasOne("Api_DnD.Model.Armure", null)
+                        .WithMany()
+                        .HasForeignKey("ArmuresId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Api_DnD.Model.Campagne", null)
+                        .WithMany()
+                        .HasForeignKey("CampagneId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("CampagneClasses", b =>
+                {
+                    b.HasOne("Api_DnD.Model.Campagne", null)
                         .WithMany()
                         .HasForeignKey("CampagneId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Campagne");
+                    b.HasOne("Api_DnD.Model.Classes", null)
+                        .WithMany()
+                        .HasForeignKey("Classesid")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
-            modelBuilder.Entity("Api_DnD.Model.Skill", b =>
+            modelBuilder.Entity("CampagneEnchantement", b =>
                 {
-                    b.HasOne("Api_DnD.Model.Perso", null)
-                        .WithMany("skills")
-                        .HasForeignKey("Persoid");
+                    b.HasOne("Api_DnD.Model.Campagne", null)
+                        .WithMany()
+                        .HasForeignKey("CampagneId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Api_DnD.Model.Enchantement", null)
+                        .WithMany()
+                        .HasForeignKey("EnchantementsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("CampagneMonstre", b =>
+                {
+                    b.HasOne("Api_DnD.Model.Campagne", null)
+                        .WithMany()
+                        .HasForeignKey("CampagneId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Api_DnD.Model.Monstre", null)
+                        .WithMany()
+                        .HasForeignKey("MonstresId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("CampagnePNJ", b =>
+                {
+                    b.HasOne("Api_DnD.Model.Campagne", null)
+                        .WithMany()
+                        .HasForeignKey("CampagneId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Api_DnD.Model.PNJ", null)
+                        .WithMany()
+                        .HasForeignKey("PNJsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("CampagneQuete", b =>
+                {
+                    b.HasOne("Api_DnD.Model.Campagne", null)
+                        .WithMany()
+                        .HasForeignKey("CampagneId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Api_DnD.Model.Quete", null)
+                        .WithMany()
+                        .HasForeignKey("QuetesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("CampagneRace", b =>
+                {
+                    b.HasOne("Api_DnD.Model.Campagne", null)
+                        .WithMany()
+                        .HasForeignKey("CampagneId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Api_DnD.Model.Race", null)
+                        .WithMany()
+                        .HasForeignKey("RacesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Api_DnD.Model.PNJ", b =>
                 {
-                    b.Navigation("Quete")
-                        .IsRequired();
+                    b.Navigation("Quetes");
                 });
 
             modelBuilder.Entity("Api_DnD.Model.Perso", b =>
                 {
-                    b.Navigation("skills");
+                    b.Navigation("Campagne");
+
+                    b.Navigation("LesArmes");
+
+                    b.Navigation("Skills");
                 });
 #pragma warning restore 612, 618
         }

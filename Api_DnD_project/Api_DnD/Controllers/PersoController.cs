@@ -10,7 +10,7 @@ namespace Api_DnD.Controllers
     [Route("[controller]")]
     public class PersoController : ControllerBase
     {
-        
+
 
         private readonly DNDContext _context;
 
@@ -25,15 +25,8 @@ namespace Api_DnD.Controllers
         {
 
             return await _context.Persos
-                .Include(p => p.arme1)
-                .Include(p=>p.arme1.Enchantement)
-                .Include(p => p.arme2)
-                .Include(p => p.arme2.Enchantement)
-                .Include(p => p.arme3)
-                .Include(p => p.arme3.Enchantement)
-                .Include(p => p.armure)
-                .Include(x=>x.armure.Enchant)
-                .Select( x => Perso.PersoToPerso(x))
+                .Include(p => p.LesArmes)
+                .ThenInclude(a => a.Enchantement)
                 .ToListAsync();
         }
 

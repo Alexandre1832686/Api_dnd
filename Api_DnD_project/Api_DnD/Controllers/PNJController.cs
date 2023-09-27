@@ -23,6 +23,21 @@ namespace Api_DnD.Controllers
             return  _context.PNJ.Select(x => PnjDTO.PnjToPnjDTO(x)).ToList();
         }
 
+        [HttpGet("GetPNJByCampagne")]
+        public async Task<ActionResult<ICollection<PNJ>>> GetPNJByCampagne(int campagneId)
+        {
+            Campagne campagne = await _context.Campagnes
+                .Include(c => c.PNJs)
+                .ThenInclude(p => p.Quetes)
+                .FirstOrDefaultAsync(c => c.Id == campagneId);
+
+            if(campagne == null)
+            {
+                return NotFound();
+            }
+            return Ok(campagne.PNJs);
+        }
+
         //GET: PersoControllerCreate
         [HttpGet("/GetPNJQuete")]
         public async Task<ActionResult<PnjDTO>> GetPNJQuete(int x)

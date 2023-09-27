@@ -7,9 +7,6 @@ namespace Api_DnD.Model
     {
         public int Id { get; set; }
 
-        public int PnjId { get; set; }
-
-        [ForeignKey ("PnjId")]
         public PNJ Pnj { get; set; }
 
         public string DescriptionQuete { get; set; }

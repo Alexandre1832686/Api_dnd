@@ -8,48 +8,5 @@
         public int Modif { get; set; }
         public int Id { get; set; }
         public ICollection<Campagne> Campagne { get; set; }
-
-
-        public Enchantement GetEnchantementById(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<Enchantement> GetAllEnchantement()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Enchantement GetRandomEnchantement()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void PostEnchantement(string nom, string description, string type, int modif)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void PutEnchantement(string nom, string description, string type, int modif)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void DeleteEnchantement(string nom)
-        {
-            throw new NotImplementedException();
-        }
-
-        public static Enchantement EnchantementToEnchantement(Enchantement e)
-        {
-            return new Enchantement
-            {
-                Nom = e.Nom,
-                Description = e.Description,
-                Type = e.Type,
-                Modif = e.Modif,
-                Id = e.Id
-            };
-        }
     }
 }
