@@ -14,7 +14,7 @@ namespace Api_DnD.Model
 
         public int MaxDexMod { get; set; }
 
-        public bool StealthDisadvantage { get; set; }
+        public int StealthDisadvantage { get; set; }
 
         public int EnchantementId { get; set; }
 
@@ -23,7 +23,7 @@ namespace Api_DnD.Model
         public ICollection<Campagne> Campagne { get; set; }
         public int Id { get; set; }
 
-        public Armure(string name, string type, int ac, bool dexBonus, int maxDexMod, bool stealthDisadvantage, int enchantementId, int id)
+        public Armure(string name, string type, int ac, bool dexBonus, int maxDexMod, int stealthDisadvantage, int enchantementId, int id)
         {
             Name = name;
             Type = type;
@@ -37,19 +37,6 @@ namespace Api_DnD.Model
 
         public Armure() { }
 
-        public static Armure ArmureToArmure(Armure a)
-        {
-            return new Armure()
-            {
-                Name = a.Name,
-                Type = a.Type,
-                Ac = a.Ac,
-                DexBonus = a.DexBonus,
-                MaxDexMod = a.MaxDexMod,
-                StealthDisadvantage = a.StealthDisadvantage,
-                EnchantementId = a.EnchantementId,
-                Enchantement = a.Enchantement
-            };
-        }
+        
     }
 }

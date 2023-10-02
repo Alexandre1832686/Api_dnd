@@ -20,7 +20,7 @@ namespace Api_DnD.Controllers
         [HttpGet("/GetAllArmure")]
         public async Task<ActionResult<IEnumerable<Armure>>> GetArmure()
         {
-            return await _context.Armures.Include(a => a.Enchantement).Select(a => Armure.ArmureToArmure(a)).ToListAsync();
+            return await _context.Armures.Include(a => a.Enchantement).ToListAsync();
         }
 
         [HttpGet("/GetArmureById/{id}")]
@@ -29,13 +29,48 @@ namespace Api_DnD.Controllers
             return await _context.Armures.FindAsync(id);
         }
 
-        //[HttpPost("/EditArmure/{Id}, {Name}, {Type}, {Ac}, {DexBonus}, {MaxDexMod}, {StealthDisadvantage}, {EnchantementId}")]
-        //public async Task<ActionResult<Armure>> EditArmure(string name,string type, int ac, int dexBonus,int maxDexBonus, int stealthDisadvantage,int EnchantementId,int id)
-        //{
-        //    Armure? armure1 = await _context.Armures.FindAsync(id);
+        [HttpPost("/CreateArmures/")]
+        public async Task<ActionResult<Arme>> CreateArme(string name, string type, int ac, bool dexBonus, int maxDexBonus, int stealthDisadvantage, int EnchantementId)
+        {
+            Armure armureCree = new Armure { Name = name, Type = type, Ac = ac, DexBonus = dexBonus, MaxDexMod = maxDexBonus, StealthDisadvantage = stealthDisadvantage, EnchantementId = EnchantementId };
 
-        //    Armure armure 2 = new Armure(name,type,ac,dexBonus,maxDexBonus,stealthDisadvantage,EnchantementId,id);
+            _context.Armures.Add(armureCree);
+            await _context.SaveChangesAsync();
 
-        //}
+            return CreatedAtAction("GetArmureById", new { id = armureCree.Id }, armureCree);
+        }
+
+        [HttpPut("/EditArmure")]
+        public async Task<ActionResult<Armure>> EditArmure(int Id, string name, string type, int ac, bool dexBonus, int maxDexBonus, int stealthDisadvantage, int EnchantementId)
+        {
+            await _context.Armures.Where(a => a.Id == Id).ExecuteUpdateAsync(setters => setters
+            .SetProperty(a => a.Name, name)
+            .SetProperty(a => a.Type, type)
+            .SetProperty(a => a.Ac, ac)
+            .SetProperty(a => a.DexBonus,dexBonus)
+            .SetProperty(a => a.MaxDexMod,maxDexBonus)
+            .SetProperty(a => a.StealthDisadvantage,stealthDisadvantage)
+            .SetProperty(a => a.EnchantementId, EnchantementId));
+
+            return NoContent();
+
+        }
+
+        // POST: ArmeController/Delete/5
+        // Si une entrée est trouvée et supprimée, la valeur true est retournée, sinon c'est la valeur false
+        [HttpDelete("/DeleteArmure/{id}")]
+        public async Task<bool> DeleteArmure(int id)
+        {
+            if (await _context.Armures.Where(a => a.Id.Equals(id)).ExecuteDeleteAsync() == 1)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        
     }
 }
