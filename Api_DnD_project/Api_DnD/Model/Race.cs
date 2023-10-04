@@ -11,9 +11,9 @@
         public int BonusConsti { get; set; }
         public int BonusCharisma {get;set;}
         public int Id { get; set; }
-        public ICollection<Campagne> Campagne { get; set; }
+        public ICollection<Campagne> Campagnes { get; set; }
 
-        public Race(string nom, int bonusPV, int bonusDex, int bonusForce, int bonusIntel, int bonusWisdom, int bonusConsti, int bonusCharisma, int id, ICollection<Campagne> campagne)
+        public Race(string nom, int bonusPV, int bonusDex, int bonusForce, int bonusIntel, int bonusWisdom, int bonusConsti, int bonusCharisma, int id)
         {
             Nom = nom;
             BonusPV = bonusPV;
@@ -24,7 +24,11 @@
             BonusConsti = bonusConsti;
             BonusCharisma = bonusCharisma;
             Id = id;
-            Campagne = campagne;
+        }
+
+        public Race()
+        {
+
         }
     }
 }

@@ -23,7 +23,7 @@ namespace Api_DnD.Model
         public ICollection<Campagne> Campagne { get; set; }
         public int Id { get; set; }
 
-        public Armure(string name, string type, int ac, bool dexBonus, int maxDexMod, int stealthDisadvantage, int enchantementId, int id)
+        public Armure(string name, string type, int ac, bool dexBonus, int maxDexMod, int stealthDisadvantage, int enchantementId, int id,int campagneid)
         {
             Name = name;
             Type = type;

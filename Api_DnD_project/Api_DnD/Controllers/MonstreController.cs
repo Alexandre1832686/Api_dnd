@@ -40,7 +40,6 @@ namespace Api_DnD.Controllers
             await _context.Monstres.Where(m => m.Id == id).ExecuteUpdateAsync(setters => setters
             .SetProperty(m => m.Nom, monstre.Nom)
             .SetProperty(m => m.Size, monstre.Size)
-            .SetProperty(m => m.Race, monstre.Race)
             .SetProperty(m => m.ArmorClass, monstre.ArmorClass)
             .SetProperty(m => m.HitPoint, monstre.HitPoint)
             .SetProperty(m => m.Speed, monstre.Speed)
