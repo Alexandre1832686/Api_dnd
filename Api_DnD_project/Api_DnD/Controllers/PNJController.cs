@@ -20,7 +20,7 @@ namespace Api_DnD.Controllers
         [HttpGet("/GetAllPNJ")]
         public async Task<ActionResult<IEnumerable<PnjDTO>>> GetAllPNJ()
         {
-            return  _context.PNJ.Select(x => PnjDTO.PnjToPnjDTO(x)).ToList();
+            return  _context.PNJ.Select(x => PnjDTO.PnjToPnjDTO(x)).OrderBy(p => p.Nom).ToList();
         }
 
         [HttpGet("GetPNJByCampagne")]
@@ -35,7 +35,7 @@ namespace Api_DnD.Controllers
             {
                 return NotFound();
             }
-            return Ok(campagne.PNJs);
+            return Ok(campagne.PNJs.OrderBy(p=>p.Name));
         }
 
         //GET: PersoControllerCreate

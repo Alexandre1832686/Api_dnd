@@ -24,6 +24,7 @@ namespace Api_DnD.Controllers
             return await _context.Monstres
                 .Include(m => m.Campagne)
                 .Include(m => m.Actions)
+                .OrderBy(m => m.Nom)
                 .ToListAsync();
         }
 

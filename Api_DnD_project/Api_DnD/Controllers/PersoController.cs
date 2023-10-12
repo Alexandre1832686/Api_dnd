@@ -26,7 +26,8 @@ namespace Api_DnD.Controllers
 
             return await _context.Persos
                 .Include(p => p.LesArmes)
-                .ThenInclude(a => a.Enchantement)
+                .ThenInclude(p => p.Enchantement)
+                .OrderBy(p => p.Nom)
                 .ToListAsync();
         }
 

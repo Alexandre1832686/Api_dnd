@@ -21,7 +21,7 @@ namespace Api_DnD.Controllers
         [HttpGet("/GetAllArme")]
         public async Task<ActionResult<IEnumerable<Arme>>> GetArme()
         {
-            return await _context.Armes.ToListAsync();
+            return await _context.Armes.Include(a => a.Enchantement).OrderBy(a => a.Nom).ToListAsync();
         }
 
         [HttpGet("/GetArme/{id}")]

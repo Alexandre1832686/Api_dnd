@@ -22,7 +22,7 @@ namespace Api_DnD.Controllers
         [HttpGet("GetAllRace")]
         public async Task<ActionResult<IEnumerable<Race>>> GetRace()
         {
-            return await _context.Races.ToListAsync();
+            return await _context.Races.OrderBy(r => r.Nom).ToListAsync();
         }
 
         // GET api/<RaceController>/5

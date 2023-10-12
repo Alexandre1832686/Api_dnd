@@ -20,6 +20,7 @@ namespace Api_DnD.Controllers
         public async Task<ActionResult<IEnumerable<Enchantement>>> GetEnchantement()
         {
             return await _context.Enchantements.Include(e => e.Campagne)
+                .OrderBy(e => e.Nom)
                 .ToListAsync();
         }
 
