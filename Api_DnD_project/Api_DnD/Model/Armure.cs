@@ -15,7 +15,7 @@
         public bool StealthDisadvantage { get; set; }
 
         public Enchantement Enchant { get; set; }
-        public ICollection<Campagne> Campagne { get; set; }
+       
 
 
         public int Id { get; set; }

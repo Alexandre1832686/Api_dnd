@@ -16,7 +16,7 @@ namespace Api_DnD.Model
 
         public string reward { get; set; }
 
-        public ICollection<Campagne> Campagne { get; set; }
+        
 
     }
 }
