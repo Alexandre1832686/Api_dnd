@@ -3,6 +3,7 @@ using System;
 using Api_DnD.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Api_DnD.Migrations
 {
     [DbContext(typeof(DNDContext))]
-    partial class DNDContextModelSnapshot : ModelSnapshot
+    [Migration("20230927144835_ComeOnManLetsGo")]
+    partial class ComeOnManLetsGo
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -130,8 +133,8 @@ namespace Api_DnD.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<int>("StealthDisadvantage")
-                        .HasColumnType("int");
+                    b.Property<bool>("StealthDisadvantage")
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<string>("Type")
                         .IsRequired()
@@ -296,6 +299,9 @@ namespace Api_DnD.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
+                    b.Property<int>("RaceId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Size")
                         .IsRequired()
                         .HasColumnType("longtext");
@@ -310,6 +316,8 @@ namespace Api_DnD.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("RaceId");
 
                     b.ToTable("Monstre", (string)null);
                 });
@@ -447,9 +455,6 @@ namespace Api_DnD.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int>("BonusCharisma")
-                        .HasColumnType("int");
-
                     b.Property<int>("BonusConsti")
                         .HasColumnType("int");
 
@@ -483,7 +488,7 @@ namespace Api_DnD.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("Descr")
+                    b.Property<string>("Desc")
                         .IsRequired()
                         .HasColumnType("longtext");
 
@@ -608,13 +613,13 @@ namespace Api_DnD.Migrations
 
             modelBuilder.Entity("CampagneRace", b =>
                 {
-                    b.Property<int>("CampagnesId")
+                    b.Property<int>("CampagneId")
                         .HasColumnType("int");
 
                     b.Property<int>("RacesId")
                         .HasColumnType("int");
 
-                    b.HasKey("CampagnesId", "RacesId");
+                    b.HasKey("CampagneId", "RacesId");
 
                     b.HasIndex("RacesId");
 
@@ -664,13 +669,13 @@ namespace Api_DnD.Migrations
 
             modelBuilder.Entity("Api_DnD.Model.Armure", b =>
                 {
-                    b.HasOne("Api_DnD.Model.Enchantement", "Enchantement")
+                    b.HasOne("Api_DnD.Model.Enchantement", "Enchant")
                         .WithMany()
                         .HasForeignKey("EnchantementId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Enchantement");
+                    b.Navigation("Enchant");
                 });
 
             modelBuilder.Entity("Api_DnD.Model.Campagne", b =>
@@ -678,6 +683,17 @@ namespace Api_DnD.Migrations
                     b.HasOne("Api_DnD.Model.Perso", null)
                         .WithMany("Campagne")
                         .HasForeignKey("Persoid");
+                });
+
+            modelBuilder.Entity("Api_DnD.Model.Monstre", b =>
+                {
+                    b.HasOne("Api_DnD.Model.Race", "Race")
+                        .WithMany()
+                        .HasForeignKey("RaceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Race");
                 });
 
             modelBuilder.Entity("Api_DnD.Model.Perso", b =>
@@ -834,7 +850,7 @@ namespace Api_DnD.Migrations
                 {
                     b.HasOne("Api_DnD.Model.Campagne", null)
                         .WithMany()
-                        .HasForeignKey("CampagnesId")
+                        .HasForeignKey("CampagneId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

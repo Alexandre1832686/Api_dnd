@@ -26,8 +26,13 @@ namespace Api_DnD.Controllers
 
             return await _context.Persos
                 .Include(p => p.LesArmes)
-                .ThenInclude(p => p.Enchantement)
-                .OrderBy(p => p.Nom)
+<<<<<<< HEAD
+                .Include(p => p.Armure)
+                .Include(x=>x.Armure.Enchantement)
+                .Select( x => Perso.PersoToPerso(x))
+=======
+                .ThenInclude(a => a.Enchantement)
+>>>>>>> a2ffe2d11fe030b0823cec48663e4e3a10d5aa24
                 .ToListAsync();
         }
 

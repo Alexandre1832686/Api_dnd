@@ -21,6 +21,8 @@ namespace Api_DnD.Controllers
         public async Task<ActionResult<IEnumerable<Monstre>>> GetMonstres()
         {
             return await _context.Monstres
+                .Include(m => m.Race)
+                .Include(m => m.Campagne)
                 .Include(m => m.Actions)
                 .ToListAsync();
         }

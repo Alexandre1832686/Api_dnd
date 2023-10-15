@@ -10,8 +10,7 @@
         public int BonusWisdom { get; set; }
         public int BonusConsti { get; set; }
         public int Id { get; set; }
-        
-
+        public ICollection<Campagne> Campagne { get; set; }
 
 
         public Race GetRaceByName(int id)
@@ -44,4 +43,5 @@
             throw new NotImplementedException();
         }
     }
+}
 }

@@ -11,3 +11,9 @@
 
     }
 }
+        public ICollection<Quete> Quetes { get; set; }
+        public ICollection<Classes> Classes { get; set; }
+        public ICollection<Race> Races { get; set; }
+
+    }
+}
