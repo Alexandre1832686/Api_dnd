@@ -25,7 +25,7 @@ namespace Api_DnD.Model
         public string DammageImmunities { get; set; }
         public string ConditionImmunities { get; set; }
         public ICollection<Action> Actions { get; set; }
-        public ICollection<Campagne> Campagne { get; set; }
+        
 
     }
 }

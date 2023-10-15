@@ -10,7 +10,6 @@ namespace Api_DnD.Controllers
     [Microsoft.AspNetCore.Mvc.Route("[controller]")]
     public class MonstreController : Controller
     {
-        
         private readonly DNDContext _context;
 
         public MonstreController(DNDContext context)
@@ -22,25 +21,25 @@ namespace Api_DnD.Controllers
         public async Task<ActionResult<IEnumerable<Monstre>>> GetMonstres()
         {
             return await _context.Monstres
+                .Include(m => m.Race)
                 .Include(m => m.Campagne)
                 .Include(m => m.Actions)
-                .OrderBy(m => m.Nom)
                 .ToListAsync();
         }
 
-        [HttpGet("/GetMonstreById/{id}")]
+        [HttpGet("GetMonstreById/{id}")]
         public async Task<ActionResult<Monstre?>> GetMonstre(int id)
         {
             return await _context.Monstres.FindAsync(id);
         }
 
-        
         [HttpPut("/EditMonstre")] 
         public async Task<ActionResult<Monstre>> EditMonstre(int id, Monstre monstre)
         {
             await _context.Monstres.Where(m => m.Id == id).ExecuteUpdateAsync(setters => setters
             .SetProperty(m => m.Nom, monstre.Nom)
             .SetProperty(m => m.Size, monstre.Size)
+            .SetProperty(m => m.Race, monstre.Race)
             .SetProperty(m => m.ArmorClass, monstre.ArmorClass)
             .SetProperty(m => m.HitPoint, monstre.HitPoint)
             .SetProperty(m => m.Speed, monstre.Speed)
@@ -63,9 +62,8 @@ namespace Api_DnD.Controllers
 
             return NoContent();
         }
-        
 
-        [HttpPost("/CreateMonstre")]
+        [HttpPost("/CreateArme")]
         public async Task<ActionResult<Monstre>> CreateMonstre(Monstre monstre)
         {
             _context.Monstres.Add(monstre);
@@ -75,7 +73,7 @@ namespace Api_DnD.Controllers
         }
 
         [HttpDelete("/DeleteMonstre/{id}")]
-        public async Task<bool> DeleteMonstre(int id)
+        public async Task<bool> Delete(int id)
         {
             if(await _context.Monstres.Where(m => m.Id.Equals(id)).ExecuteDeleteAsync() == 1)
             {
@@ -86,6 +84,5 @@ namespace Api_DnD.Controllers
                 return false;
             }
         }
-        
     }
 }

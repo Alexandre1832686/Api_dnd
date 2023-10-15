@@ -21,8 +21,7 @@ namespace Api_DnD.Data
         public DbSet<PNJ> PNJ { get; set; }
         public DbSet<Key> Key {get;set;}
         public DbSet<Monstre> Monstres { get; set; }
-        public DbSet<Campagne> Campagnes { get; set; }
-        public DbSet<Quete> Quetes { get; set; }
+        public DbSet<Extension> Extensions { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -35,8 +34,8 @@ namespace Api_DnD.Data
             modelBuilder.Entity<PNJ>().ToTable("PNJ");
             modelBuilder.Entity<Key>().ToTable("Key");
             modelBuilder.Entity<Monstre>().ToTable("Monstre");
-            modelBuilder.Entity<Campagne>().ToTable("Campagne");
-            modelBuilder.Entity<Quete>().ToTable("Quete");
+            modelBuilder.Entity<Extension>().ToTable("Extension");
+
         }
     }
 }

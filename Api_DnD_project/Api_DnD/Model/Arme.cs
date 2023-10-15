@@ -14,13 +14,22 @@ namespace Api_DnD.Model
 
         [ForeignKey("EnchantementId")]
         public Enchantement Enchantement { get; set; }
-
-
         public ICollection<Campagne> Campagne { get; set; }
 
 
 
         public int id { get; set; }
 
+       public static Arme ArmeToArme(Arme a)
+       {
+            return new Arme
+            {
+                BonusJet = a.BonusJet,
+                BonusForce = a.BonusForce,
+                Nom = a.Nom,
+                Enchantement = a.Enchantement,
+                id = a.id
+            };
+       }
     }
 }
