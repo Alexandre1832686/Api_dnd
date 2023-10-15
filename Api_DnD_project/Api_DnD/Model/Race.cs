@@ -9,28 +9,26 @@
         public int BonusIntel { get; set; }
         public int BonusWisdom { get; set; }
         public int BonusConsti { get; set; }
+        public int BonusCharisma {get;set;}
         public int Id { get; set; }
-        public ICollection<Campagne> Campagne { get; set; }
+        public ICollection<Campagne> Campagnes { get; set; }
 
-
-        public Race GetRaceByName(int id)
+        public Race(string nom, int bonusPV, int bonusDex, int bonusForce, int bonusIntel, int bonusWisdom, int bonusConsti, int bonusCharisma, int id)
         {
-            throw new NotImplementedException();
+            Nom = nom;
+            BonusPV = bonusPV;
+            BonusDex = bonusDex;
+            BonusForce = bonusForce;
+            BonusIntel = bonusIntel;
+            BonusWisdom = bonusWisdom;
+            BonusConsti = bonusConsti;
+            BonusCharisma = bonusCharisma;
+            Id = id;
         }
 
-        public List<Race> GetAllRace()
+        public Race()
         {
-            throw new NotImplementedException();
-        }
 
-        public Race GetRandomRace()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void PostRace(string nom, int pv, int dex, int force, int intel, int wisdom, int consti)
-        {
-            throw new NotImplementedException();
         }
 
         public void PutRace(string nom, int pv, int dex, int force, int intel, int wisdom, int consti)
